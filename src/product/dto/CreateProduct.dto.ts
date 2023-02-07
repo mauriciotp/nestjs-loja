@@ -6,12 +6,16 @@ import {
   IsNumber,
   IsString,
   IsUrl,
+  IsUUID,
   MaxLength,
   Min,
   ValidateNested,
 } from 'class-validator';
 
 export class CreateProductDto {
+  @IsUUID(undefined)
+  userId: string;
+
   @IsString()
   @IsNotEmpty()
   name: string;
