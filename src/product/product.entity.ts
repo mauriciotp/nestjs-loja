@@ -2,7 +2,7 @@ export class ProductEntity {
   id: string;
   userId: string;
   name: string;
-  value: string;
+  value: number;
   amount: number;
   description: string;
   characteristics: ProductCharacteristic[];
