@@ -38,4 +38,14 @@ export class ProductRepository {
 
     return product;
   }
+
+  async remove(id: string) {
+    const product = this.findById(id);
+
+    const products = this.products.filter((product) => product.id !== id);
+
+    this.products = products;
+
+    return product;
+  }
 }

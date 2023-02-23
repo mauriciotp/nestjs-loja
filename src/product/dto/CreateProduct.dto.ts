@@ -12,7 +12,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-export class CreateProductDto {
+export class CreateProductDTO {
   @IsUUID(undefined)
   userId: string;
 

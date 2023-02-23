@@ -1,9 +1,16 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { CreateProductDto } from './dto/CreateProduct.dto';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { CreateProductDTO } from './dto/CreateProduct.dto';
 import { ProductEntity } from './product.entity';
 import { ProductRepository } from './product.repository';
 import { v4 as uuid } from 'uuid';
-import { ListProductDTO } from './dto/ListProduct.dto';
 import { UpdateProductDTO } from './dto/UpdateProduct.dto';
 
 @Controller('/products')
@@ -11,7 +18,7 @@ export class ProductController {
   constructor(private productRepository: ProductRepository) {}
 
   @Post()
-  async createProduct(@Body() productData: CreateProductDto) {
+  async createProduct(@Body() productData: CreateProductDTO) {
     const productEntity = new ProductEntity();
     productEntity.id = uuid();
     productEntity.amount = productData.amount;
@@ -42,6 +49,16 @@ export class ProductController {
     return {
       product: productUpdated,
       message: 'product updated successfully',
+    };
+  }
+
+  @Delete('/:id')
+  async removeProduct(@Param('id') id: string) {
+    const productRemoved = await this.productRepository.remove(id);
+
+    return {
+      product: productRemoved,
+      message: 'product removed successfully',
     };
   }
 }
